@@ -11,7 +11,7 @@ class CacheableBehavior extends ModelBehavior {
  *
  * @var array
  */
-	var $_settings = array();
+	protected $_settings = array();
 
 /**
  * setup Callback
@@ -20,13 +20,16 @@ class CacheableBehavior extends ModelBehavior {
 		// Setting the default settings for a Model
 		if (!isset($this->_settings[$Model->alias])) {
 			$this->_settings[$Model->alias] = array_merge(
+				Cache::settings(),
 				array(
 					'duration' => 3600, // One hour
-					'path' => CACHE . 'cacher' . DS // Save the cacher caches in the 'cacher' cache subdirectory (relevant if the engine is 'File')
+					'path' => CACHE . 'cacher' . DS, // Save the cacher caches in the 'cacher' cache subdirectory (relevant if the engine is 'File')
+					'prefix' => 'cacher_'
 				),
 				$settings
 			);
-			if (!file_exists($this->_settings[$Model->alias]['path'])) {
+			if ($this->_settings[$Model->alias]['engine'] == 'File' && !file_exists($this->_settings[$Model->alias]['path'])) {
+				App::uses('Folder', 'Utility');
 				$folder = new Folder;
 				$folder->create($this->_settings[$Model->alias]['path'], 0777);
 			}

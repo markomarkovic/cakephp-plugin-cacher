@@ -1,7 +1,8 @@
 <?php
+App::uses('Model', 'Model');
 /**
  * A standard CakePHP AppModel with the find method overriden.
- * The code from it should be put in app/app_model.php
+ * The code from it should be put in app/Model/AppModel.php
  */
 class AppModel extends Model {
 
@@ -10,13 +11,13 @@ class AppModel extends Model {
  *
  * @var object Cacher instance
  */
-	var $_Cacher = null;
+	protected $_Cacher = null;
 
 /**
- * Overriding find in order for it to transparently load data from cache.
+ * Overrides Model::find to transparently load data from cache
  */
-	function find($type, $params, $useCache = true) {
-		if ($useCache && in_array('Cacheable', $this->Behaviors->_attached)){
+	public function find($type, $params, $useCache = true) {
+		if ($useCache && $this->Behaviors->enabled('Cacheable')){
 			if (!isset($this->_Cacher)) {
 				App::import('Model', 'Cacher.Cacher');
 				$this->_Cacher = new Cacher;
@@ -28,4 +29,3 @@ class AppModel extends Model {
 	}
 
 }
-
