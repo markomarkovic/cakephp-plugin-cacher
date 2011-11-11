@@ -65,8 +65,7 @@ class CacheableBehavior extends ModelBehavior {
  */
 	function _updateCounter($alias = 'AppModel') {
 		if (Configure::read('Cache.disable') !== true) {
-			$tag = '_' . $alias;
-			Cache::write($tag, 1 + (int)Cache::read($tag));
+			Cache::write($alias, 1 + (int)Cache::read($alias));
 		}
 	}
 
