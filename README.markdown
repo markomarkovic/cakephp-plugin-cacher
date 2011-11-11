@@ -11,6 +11,11 @@ First download or checkout the code for the Cacher and put it in your _app/plugi
              /models
                 /behaviors
 
+The easiest way to do this is to directly clone the repository to the right location:
+
+    $ cd app/plugins/
+    $ git clone git://github.com/markomarkovic/cakephp-plugin-cacher.git cacher
+
 Put the code from _for_app_folder/app_model.php_ into your _app/app_model.php_.
 
 Add the _Cacher.Cacheable_ to the _$actsAs_ in the model you wish to cache:
@@ -24,7 +29,7 @@ You can further configure each model to use a different cache configuration, jus
     ...
     var $actsAs = array(
         'Cacher.Cacheable' => array(
-           'duration' => '+1 day'
+            'duration' => '+1 day'
         )
     );
     ...
@@ -39,7 +44,7 @@ For example, ArticlesController:
 
 if the query with these parameters is cached, data is returned from the cache, otherwise the data is read from the database and cache is updated.
 
-## Licence
+## License
 Released under The MIT License
 
 ## Credits

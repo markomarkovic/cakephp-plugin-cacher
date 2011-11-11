@@ -11,7 +11,7 @@ class Cacher { // Not using extends AppModel since we're going to call only $Mod
 
 			Cache::config('Cacher'.'_'.$Model->alias); // Using the cache config of this model
 
-			$tag = isset($Model->alias) ? '_' . $Model->alias : 'AppModel';
+			$tag = isset($Model->alias) ? $Model->alias : 'AppModel';
 			$paramsHash = md5(json_encode($params));
 			$version = (int)Cache::read($tag);
 			$fullTag = $tag . '_' . $type . '_' . $paramsHash;

@@ -22,11 +22,12 @@ class CacheableBehavior extends ModelBehavior {
 			$this->_settings[$Model->alias] = array_merge(
 				array(
 					'duration' => 3600, // One hour
-					'path' => CACHE . 'cacher' . DS // Save the cacher caches in the 'cacher' cache subdirectory (relevant if the engine is 'File')
+					'path' => CACHE . 'cacher' . DS, // Save the cacher caches in the 'cacher' cache subdirectory (relevant if the engine is 'File')
+					'prefix' => 'cacher_'
 				),
 				$settings
 			);
-			if (!file_exists($this->_settings[$Model->alias]['path'])) {
+			if ($this->_settings[$Model->alias]['engine'] == 'File' && !file_exists($this->_settings[$Model->alias]['path'])) {
 				$folder = new Folder;
 				$folder->create($this->_settings[$Model->alias]['path'], 0777);
 			}
