@@ -16,7 +16,7 @@ class CacheableBehavior extends ModelBehavior {
 /**
  * setup Callback
  */
-	function setup(&$Model, $settings) {
+	public function setup(&$Model, $settings) {
 		// Setting the default settings for a Model
 		if (!isset($this->_settings[$Model->alias])) {
 			$this->_settings[$Model->alias] = array_merge(
@@ -47,7 +47,7 @@ class CacheableBehavior extends ModelBehavior {
  *
  * Updating the counter in order to invalidate the cache on next cache request.
  */
-	function afterSave(&$Model, $created) {
+	public function afterSave(&$Model, $created) {
 		$this->_updateCounter($Model->alias);
 		parent::afterSave($created);
 	}
@@ -57,7 +57,7 @@ class CacheableBehavior extends ModelBehavior {
  *
  * Updating the counter in order to invalidate the cache on next cache request.
  */
-	function afterDelete(&$Model) {
+	public function afterDelete(&$Model) {
 		$this->_updateCounter($Model->alias);
 		parent::afterDelete();
 	}
@@ -65,7 +65,7 @@ class CacheableBehavior extends ModelBehavior {
 /**
  * Updating the counter (version of the model) in the cache
  */
-	function _updateCounter($alias = 'AppModel') {
+	protected function _updateCounter($alias = 'AppModel') {
 		if (Configure::read('Cache.disable') !== true) {
 			$tag = '_' . $alias;
 			Cache::write($tag, 1 + (int)Cache::read($tag));

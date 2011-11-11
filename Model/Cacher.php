@@ -6,7 +6,7 @@
  */
 class Cacher { // Not using extends AppModel since we're going to call only $Model's and static Cache methods
 
-	function find(&$Model, $type, $params) {
+	public function find(&$Model, $type, $params) {
 		if (Configure::read('Cache.disable') !== true) {
 
 			$tag = isset($Model->alias) ? $Model->alias : 'AppModel';
