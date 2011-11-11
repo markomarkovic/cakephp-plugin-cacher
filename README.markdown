@@ -1,6 +1,8 @@
 # CakePHP Cacher plugin
 The Cacher plugin enables transparent caching of all database queries that are using Model::find()
 
+_For CakePHP 2.0 compatible code, see [__2.0__ branch](https://github.com/markomarkovic/cakephp-plugin-cacher/tree/2.0)._
+
 ## Installation and usage
 First download or checkout the code for the Cacher and put it in your _app/plugins_ directory. The directory structure should look like this:
 
