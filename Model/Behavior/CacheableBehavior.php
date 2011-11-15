@@ -43,6 +43,15 @@ class CacheableBehavior extends ModelBehavior {
 	}
 
 /**
+ * Clears the cache for a Model
+ *
+ * @param string $alias alias of the model to clear
+ */
+	public function clear($alias) {
+		return $this->_updateCounter($alias);
+	}
+
+/**
  * afterSave Callback
  *
  * Updating the counter in order to invalidate the cache on next cache request.
@@ -68,7 +77,7 @@ class CacheableBehavior extends ModelBehavior {
 	protected function _updateCounter($alias = 'AppModel') {
 		if (Configure::read('Cache.disable') !== true) {
 			$cacheConfig = "Cacher_{$alias}";
-			Cache::write($alias, 1 + (int)Cache::read($alias, $cacheConfig), $cacheConfig);
+			return Cache::write($alias, 1 + (int)Cache::read($alias, $cacheConfig), $cacheConfig);
 		}
 	}
 
