@@ -16,7 +16,7 @@ class AppModel extends Model {
 /**
  * Overrides Model::find to transparently load data from cache
  */
-	public function find($type, $params, $useCache = true) {
+	public function find($type, $params = array(), $useCache = true) {
 		if ($useCache && $this->Behaviors->enabled('Cacheable')){
 			if (!isset($this->_Cacher)) {
 				App::import('Model', 'Cacher.Cacher');
