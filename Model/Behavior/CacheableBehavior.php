@@ -58,7 +58,7 @@ class CacheableBehavior extends ModelBehavior {
  */
 	public function afterSave(&$Model, $created) {
 		$this->_updateCounter($Model->alias);
-		parent::afterSave($created);
+		parent::afterSave($Model, $created);
 	}
 
 /**
@@ -68,7 +68,7 @@ class CacheableBehavior extends ModelBehavior {
  */
 	public function afterDelete(&$Model) {
 		$this->_updateCounter($Model->alias);
-		parent::afterDelete();
+		parent::afterDelete($Model);
 	}
 
 /**
