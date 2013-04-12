@@ -27,7 +27,7 @@ class CacheableBehavior extends ModelBehavior {
 				),
 				$settings
 			);
-			if ($this->_settings[$Model->alias]['engine'] == 'File' && !file_exists($this->_settings[$Model->alias]['path'])) {
+			if (isset($this->_settings[$Model->alias]['engine']) && $this->_settings[$Model->alias]['engine'] == 'File' && !file_exists($this->_settings[$Model->alias]['path'])) {
 				$folder = new Folder;
 				$folder->create($this->_settings[$Model->alias]['path'], 0777);
 			}
